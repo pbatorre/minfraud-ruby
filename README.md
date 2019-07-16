@@ -1,7 +1,7 @@
 # Ruby interface to the MaxMind minFraud API
 
-Compatible with version minFraud API v1.3  
-[minFraud API documentation](http://dev.maxmind.com/minfraud/)  
+Compatible with version minFraud API v1.3
+[minFraud API documentation](http://dev.maxmind.com/minfraud/)
 [minFraud](http://www.maxmind.com/en/ccv_overview)
 
 [![Build Status](https://travis-ci.org/rdpitts/minfraud-ruby.svg?branch=master)](https://travis-ci.org/rdpitts/minfraud-ruby)
@@ -42,7 +42,7 @@ transaction.risk_score
 
 ### Exception handling
 
-There are three different exceptions that this gem may raise. Please be prepared to handle them:
+There are four different exceptions that this gem may raise. Please be prepared to handle them:
 
 ```ruby
 # Raised if configuration is invalid
@@ -51,8 +51,11 @@ class ConfigurationError < ArgumentError; end
 # Raised if a transaction is invalid
 class TransactionError < ArgumentError; end
 
-# Raised if minFraud returns an error, or if there is an HTTP error
+# Raised if minFraud returns a client-side error
 class ResponseError < StandardError; end
+
+# Raised if minFraud returns a server-side error
+class ServerError < StandardError; end
 ```
 
 ### Transaction fields

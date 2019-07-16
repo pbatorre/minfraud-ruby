@@ -14,9 +14,15 @@ module Minfraud
     # Raises an exception if minFraud responds with anything other than an HTTP success code
     # @param raw [Net::HTTPResponse]
     def initialize(raw)
-      raise ResponseError, "The minFraud service responded with http error #{raw.class}" unless raw.is_a? Net::HTTPSuccess
-      decode_body(raw.body)
-      raise ResponseError, "Error message from minFraud: #{error}" if errored?
+      if raw.is_a?(Net::HTTPSuccess)
+        decode_body(raw.body)
+
+        raise ResponseError, "Error message from minFraud: #{error}" if errored?
+      elsif raw.is_a?(Net::HTTPServerError)
+        raise ServerError
+      else
+        raise ResponseError, "The minFraud service responded with http error #{raw.class}"
+      end
     end
 
     private
