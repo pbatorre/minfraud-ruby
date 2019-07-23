@@ -6,9 +6,12 @@ module Minfraud
   # Raised if a transaction is invalid
   class TransactionError < ArgumentError; end
 
-  # Raised if minFraud returns an error, or if there is an HTTP error
+  # Raised if minFraud returns a client-side error
   class ResponseError < StandardError; end
-  
+
+  # Raised if there is a server-side error
+  class ServerError < StandardError; end
+
   # May be used to configure using common block style:
   #
   # ```ruby
