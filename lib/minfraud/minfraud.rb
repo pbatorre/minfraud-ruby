@@ -45,6 +45,18 @@ module Minfraud
     @@license_key = key
   end
 
+  # Module attribute getter for read_timeout
+  # @return [Integer, 60] read_timeout
+  def self.read_timeout
+    class_variable_defined?(:@@read_timeout) ? @@read_timeout : 60
+  end
+
+  # Module attribute setter for read_timeout
+  # @param value [Integer] in seconds
+  def self.read_timeout=(value)
+    @@read_timeout = value
+  end
+
   # Module attribute getter for requested_type
   # minFraud service level (standard/premium)
   # @return [String, nil] service level if set
