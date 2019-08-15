@@ -41,6 +41,32 @@ describe Minfraud do
     end
   end
 
+  describe '.read_timeout' do
+    let(:read_timeout) { 30 }
+
+    before { Minfraud.remove_class_variable(:@@read_timeout) if Minfraud.class_variable_defined?(:@@read_timeout) }
+
+    it 'gets read_timeout attribute set on Minfraud module' do
+      Minfraud.class_variable_set(:@@read_timeout, read_timeout)
+      expect(Minfraud.read_timeout).to eq(read_timeout)
+    end
+
+    it 'returns 60 when read_timeout attribute is not set' do
+      expect(Minfraud.read_timeout).to eq(60)
+    end
+  end
+
+  describe '.read_timeout=' do
+    let(:read_timeout) { 30 }
+
+    before { Minfraud.remove_class_variable(:@@read_timeout) if Minfraud.class_variable_defined?(:@@read_timeout) }
+
+    it 'sets read_timeout attribute on Minfraud module' do
+      Minfraud.read_timeout = read_timeout
+      expect(Minfraud.class_variable_get(:@@read_timeout)).to eq(read_timeout)
+    end
+  end
+
   describe '.uri' do
     after do
       Minfraud.remove_class_variable(:@@uri)

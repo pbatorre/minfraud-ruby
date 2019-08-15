@@ -63,9 +63,12 @@ module Minfraud
     def send_get_request
       uri = Minfraud.uri
       uri.query = URI.encode_www_form(encoded_query)
+
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      http.read_timeout = Minfraud.read_timeout
+
       request = Net::HTTP::Get.new(uri.request_uri)
       http.request(request)
     end

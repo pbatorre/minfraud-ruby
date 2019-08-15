@@ -35,6 +35,7 @@ describe Minfraud::Request do
       expect(Net::HTTP).to receive(:new).and_return(http)
       expect(http).to receive(:use_ssl=).with(true)
       expect(http).to receive(:verify_mode=).with(OpenSSL::SSL::VERIFY_NONE)
+      expect(http).to receive(:read_timeout=).with(60)
       expect(Net::HTTP::Get).to receive(:new)
       expect(http).to receive(:request).and_return(double())
       Minfraud::Request.new(trans).get
