@@ -45,6 +45,18 @@ module Minfraud
     @@license_key = key
   end
 
+  # Module attribute getter for open_timeout
+  # @return [Integer, 60] open_timeout
+  def self.open_timeout
+    class_variable_defined?(:@@open_timeout) ? @@open_timeout : 60
+  end
+
+  # Module attribute setter for open_timeout
+  # @param value [Integer] in seconds
+  def self.open_timeout=(value)
+    @@open_timeout = value
+  end
+
   # Module attribute getter for read_timeout
   # @return [Integer, 60] read_timeout
   def self.read_timeout
