@@ -68,6 +68,7 @@ module Minfraud
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
       http.read_timeout = Minfraud.read_timeout
+      http.open_timeout = Minfraud.open_timeout
 
       request = Net::HTTP::Get.new(uri.request_uri)
       http.request(request)
